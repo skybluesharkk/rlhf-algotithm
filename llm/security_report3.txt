@@ -1,0 +1,17 @@
+
+
+Attack Vector #1: SQL Injecction
+
+- URL Affected: http:://sunintas.com (id and pw input fields) 
+- Payload: 'OR '1='1'
+- Mitigations: Use parameterized query and input validation.
+- Description and Mitigation for Cross-site Scripting
+  Cross-site scripting (also known as XSS) is a web application vulnerability commonly used by hackers to inject client-side scripts into a web page viewed by another user. Injection of malicious code into a user's web browser allows hackers to steal user cookies, steal sensitive data, and perform other malicious activities. 
+
+URL Affected
+http://suninas.com /board/ notice
+
+Payload: < script >alert( 1 )</ script >
+
+Mitigation
+Use HTML escaping to prevent malicious code from executing and Content-Security-Policy (CSP) to prevent loading of untrusted scripts.

@@ -1,0 +1,119 @@
+다음은 크롤링된 웹 페이지의 통계 및 샘플 데이터입니다.
+아래 정보를 기반으로 주요 공격 벡터를 식별하고 설명하시오.
+
+[크롤링 요약]
+- 전체 링크 수: 5
+- 고유 호스트 수: 1
+- 입력 필드가 있는 페이지 수: 2
+- 쿼리 파라미터가 있는 페이지 수: 2
+
+[샘플 데이터]
+URL: http://suninatas.com/
+  - input_fields: [{"type": "text", "name": "id"}, {"type": "password", "name": "pw"}]
+  - query_params: {}
+
+URL: http://suninatas.com/redirect?url=https://www.facebook.com/suninatas
+  - input_fields: []
+  - query_params: {"url": "https://www.facebook.com/suninatas"}
+
+URL: http://suninatas.com/redirect?url=http://www.teruten.com/kr/index.php
+  - input_fields: []
+  - query_params: {"url": "http://www.teruten.com/kr/index.php"}
+
+URL: http://suninatas.com/chatting
+  - input_fields: []
+  - query_params: {}
+
+URL: http://suninatas.com/board/notice
+  - input_fields: [{"name": "searchT"}, {"type": "text", "name": "searchK", "value": ""}]
+  - query_params: {}
+
+다음은 크롤링된 웹 페이지의 통계 및 샘플 데이터입니다.
+아래 정보를 기반으로 주요 공격 벡터를 식별하고 설명하시오.
+
+[크롤링 요약]
+- 전체 링크 수: 5
+- 고유 호스트 수: 1
+- 입력 필드가 있는 페이지 수: 2
+- 쿼리 파라미터가 있는 페이지 수: 2
+
+[샘플 데이터]
+URL: http://suninatas.com/
+  - input_fields: [{"type": "text", "name": "id"}, {"type": "password", "name": "pw"}]
+  - query_params: {}
+
+URL: http://suninatas.com/redirect?url=https://www.facebook.com/suninatas
+  - input_fields: []
+  - query_params: {"url": "https://www.facebook.com/suninatas"}
+
+URL: http://suninatas.com/redirect?url=http://www.teruten.com/kr/index.php
+  - input_fields: []
+  - query_params: {"url": "http://www.teruten.com/kr/index.php"}
+
+URL: http://suninatas.com/chatting
+  - input_fields: []
+  - query_params: {}
+
+URL: http://suninatas.com/board/notice
+  - input_fields: [{"name": "searchT"}, {"type": "text", "name": "searchK", "value": ""}]
+  - query_params: {}
+"""
+
+import json
+import re
+import requests
+import sys
+from bs4 import BeautifulSoup
+from collections import OrderedDict
+from datetime import datetime
+from functools import partial
+from itertools import chain
+from operator import itemgetter
+from urllib.parse import urlparse, urljoin, urlunparse, parse_qs, urlencode
+
+from common import (
+    get_logger,
+    is_valid_url,
+)
+
+
+def get_input_fields(url):
+    """
+    임베딩 연산을 위한 함수
+
+    Args:
+        url (str): 특정 URL
+
+    Returns:
+         dict: 포함되어야 한 여러 개의 input_field 중 하나의 이름을 리턴한 배열
+
+    Examples:
+
+        >>> url = 'http://example.com'
+        >>> fields = [
+       ...     {'type': 'text', 'name': 'id'}, {'name':'pw'}]
+
+    """
+
+    r = requests.get(url)
+    if r.status_code!= 200:
+       raise ValueError(f'{url} is not a valid URL.')
+
+    soup = BeautifulStoneSoup(r.text, 'html.parser')
+    input_field_elements = soup.find_all('input')
+
+    fields = []
+    for input_element in sorted(input_element_list, key=itemgetter('name')):
+        fields.append({
+            'type': input_elem.attrs.get('type', '').lower(),
+            'name' : input_name,
+        })
+
+    return fields
+
+def parse_query_params(url, query_string=None):
+
+    parsed_url = urlparse(url.rstrip('/'))
+    query_string = query_parse(query_url) if query_url is not None else {}
+
+    if parsed_url.query:

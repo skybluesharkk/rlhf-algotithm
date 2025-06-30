@@ -1,0 +1,60 @@
+"""
+
+import json
+import re
+import requests
+import sys
+from bs4 import BeautifulSoup
+from collections import OrderedDict
+from datetime import datetime
+from functools import partial
+from itertools import chain
+from operator import itemgetter
+from urllib.parse import urlparse, urljoin, urlunparse, parse_qs, urlencode
+
+from common import (
+    get_logger,
+    is_valid_url,
+)
+
+
+def get_input_fields(url):
+    """
+    임베딩 연산을 위한 함수
+
+    Args:
+        url (str): 특정 URL
+
+    Returns:
+         dict: 포함되어야 한 여러 개의 input_field 중 하나의 이름을 리턴한 배열
+
+    Examples:
+
+        >>> url = 'http://example.com'
+        >>> fields = [
+       ...     {'type': 'text', 'name': 'id'}, {'name':'pw'}]
+
+    """
+
+    r = requests.get(url)
+    if r.status_code!= 200:
+       raise ValueError(f'{url} is not a valid URL.')
+
+    soup = BeautifulStoneSoup(r.text, 'html.parser')
+    input_field_elements = soup.find_all('input')
+
+    fields = []
+    for input_element in sorted(input_element_list, key=itemgetter('name')):
+        fields.append({
+            'type': input_elem.attrs.get('type', '').lower(),
+            'name' : input_name,
+        })
+
+    return fields
+
+def parse_query_params(url, query_string=None):
+
+    parsed_url = urlparse(url.rstrip('/'))
+    query_string = query_parse(query_url) if query_url is not None else {}
+
+    if parsed_url.query:

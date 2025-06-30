@@ -1,0 +1,7 @@
+
+
+1) SQL Injections:
+  1. Vulnerable URL:  http://suninas.com/?id=1&pw=1
+  2. Payload: 'OR 1=1'
+  3. Mitigation Strategy: Use parameterized query.
+  4. SQL injection is a common web application vulnerability. It allows attackers inject malicious SQL code to manipulate the database. The vulnerability in the URL http://www

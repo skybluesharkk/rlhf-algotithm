@@ -1,0 +1,23 @@
+
+1) SQL Injestion:
+- Affect URL:  http://sunintas.com (id and pw input fields) 
+- Example Payload: 'OR '1'=1
+- Mitigations: Use Input Validation and Parameterized queries
+
+2) Cross-Site Scripting (XSS):
+- Description : This vulnerability occurs when an attacker injects client-side script into a web page, which may be executed by a visitor to the web page in the context of the victim website.
+-  Affected URL : http://www1.suninat.com
+- Exmaple Payload : <script> alert('Xss')</scrip
+- MITIGATION : Use input Validation and parameterize queries. 
+
+3) Path Traversal:
+  Description: This attack is used to read files that are not intended to be accessed by the web server.
+  Affect URL :  http:suninata.com redirect?url='http://evil.com'
+  Example Payload:'http:///evil.c
+  MITIGATION: Use Parameterized Queries
+
+4) Remote File Inclusion (RFI):
+  This attack is use to read the file that are on the web servers file system.
+Affect url: http:sunintasa.com login
+Example Paylaod: file=http:/etc/passwd
+MITIGATIONS: Use parameterized Queris

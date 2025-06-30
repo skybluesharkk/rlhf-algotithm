@@ -1,0 +1,34 @@
+
+
+1) SQL Injections:
+- Affects: http: // suninatas. com / ( id, pw ) fields
+- Example Payload:'or '1='1 
+- Mitigations: Use Input Validation and Parameterized Queries
+
+- Description : This vulnerability allow attackers to manipulates database query by injecting sql code into the input fields
+
+Affected URL : http:// suninatas.com / (id, pq fields) 
+Example Payload :'or "1=' 1
+Mitigation : Use input Validation and parameterised queries
+
+Cross-Site-Scripting ( XSS )
+-Affects : http: suninats.com board notice (searchk field) 
+
+
+
+-Example Pay Load : <script >alert( 1 )</script >
+Mitigations : Use HTML Escape and Content security policy
+
+Open Redirect
+-Description : Attackers Can redirect users To malicious sites  via unvalidate redirect parameters
+
+affected URL :  http:// sunintas. com / redirect? url =...
+Example payload : redirect? URL = http://malicous.example.com
+Mitgation : Validate Redirect destinations against whitelist
+
+Authentication Bypass Via Brute Forcing
+-description : attackers can repeatedly Attempt login credentials Due to lack Of rate limiting
+
+affects URL : HTTP:// sunina ts.com  (login form )
+Example PAYLOAD : Multiple rapid logins with common password
+Mitagation : Implement Rate Limiting and account Lockout after Multiple failures
